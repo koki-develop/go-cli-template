@@ -7,7 +7,9 @@ before:
     # you may remove this if you don't need go generate
     - go generate ./...
 builds:
-  - env:
+  - ldflags:
+      - -s -w -X github.com/koki-develop/CLI_NAME/cmd.version=v{{.Version}} # TODO
+    env:
       - CGO_ENABLED=0
     goos:
       - linux
