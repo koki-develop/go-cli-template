@@ -31,8 +31,7 @@ jobs:
         with:
           persist-credentials: false
       - uses: ./.github/actions/setup
-      - run: goreleaser check
-      - run: goreleaser release --snapshot --clean
+      - run: go build .
 
   lint:
     timeout-minutes: 10
@@ -46,3 +45,15 @@ jobs:
       - uses: ./.github/actions/setup
       - name: lint
         run: golangci-lint run --verbose ./...
+
+  goreleaser:
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+      - run: goreleaser check
