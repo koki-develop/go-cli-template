@@ -1,0 +1,49 @@
+name: Release Please
+
+permissions: {}
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release-please:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # for create a release
+      pull-requests: write # for open a pull request
+      issues: write # for create labels
+    outputs:
+      should-release: ${{ steps.release-please.outputs.release_created }}
+    steps:
+      - uses: googleapis/release-please-action@a02a34c4d625f9be7cb89156071d8567266a2445 # v4.2.0
+        id: release-please
+        with:
+          release-type: simple
+          token: ${{ github.token }}
+
+  release:
+    if: ${{ needs.release-please.outputs.should-release == 'true' }}
+    timeout-minutes: 10
+    needs: release-please
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # for upload release assets
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+
+      - name: release
+        run: goreleaser release --clean
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TAP_GITHUB_TOKEN: ${{ secrets.TAP_GITHUB_TOKEN }}
