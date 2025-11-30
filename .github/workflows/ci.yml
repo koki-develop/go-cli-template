@@ -8,8 +8,13 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
+    name: Test
     timeout-minutes: 10
     permissions:
       contents: read
@@ -22,6 +27,7 @@ jobs:
       - run: go test ./...
 
   build:
+    name: Build
     timeout-minutes: 10
     permissions:
       contents: read
@@ -34,6 +40,7 @@ jobs:
       - run: go build .
 
   lint:
+    name: Lint
     timeout-minutes: 10
     permissions:
       contents: read
@@ -47,6 +54,7 @@ jobs:
         run: golangci-lint run --verbose ./...
 
   goreleaser:
+    name: GoReleaser
     timeout-minutes: 10
     permissions:
       contents: read
