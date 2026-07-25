@@ -7,7 +7,6 @@
 <!-- <a href="https://github.com/koki-develop/CLI_NAME/releases/latest"><img alt="GitHub all releases" src="https://img.shields.io/github/downloads/koki-develop/CLI_NAME/total?style=flat"></a> -->
 <!-- <a href="https://github.com/koki-develop/CLI_NAME/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/koki-develop/CLI_NAME/ci.yml?logo=github" alt="GitHub Workflow Status"></a> -->
 <!-- <a href="https://codeclimate.com/github/koki-develop/CLI_NAME/maintainability"><img src="https://img.shields.io/codeclimate/maintainability/koki-develop/CLI_NAME?style=flat&amp;logo=codeclimate" alt="Maintainability"></a> -->
-<!-- <a href="https://goreportcard.com/report/github.com/koki-develop/CLI_NAME"><img src="https://goreportcard.com/badge/github.com/koki-develop/CLI_NAME" alt="Go Report Card"></a> -->
 <!-- <a href="./LICENSE"><img src="https://img.shields.io/github/license/koki-develop/CLI_NAME" alt="LICENSE"></a> -->
 </p>
 
